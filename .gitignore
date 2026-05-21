@@ -1,47 +1,39 @@
-# Configuration and system files
-*.conf.swp
-*.conf.bak
-*.tmp
+```
+# Dependencies
+node_modules/
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+dist/
+build/
+target/
+.gradle/
 
-# Logs
+# Logs and temp files
 *.log
+*.tmp
+*.swp
+*.swo
 
 # Environment
 .env
 .env.local
 *.env.*
 
-# Dependencies
-node_modules/
-venv/
-.venv/
-__pycache__/
-*.egg-info/
-dist/
-build/
-target/
-
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
 # Coverage
-.coverage
 coverage/
 htmlcov/
-
-# Python specific
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
+.coverage
 
 # Compressed files
 *.zip
@@ -66,3 +58,4 @@ htmlcov/
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+```

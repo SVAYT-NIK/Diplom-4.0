@@ -29,8 +29,6 @@ services:
       - "3000:80"
     depends_on:
       - backend
-    volumes:
-      - ./frontend/src:/app/src
     restart: unless-stopped
 
 volumes:
