@@ -1,62 +1,53 @@
 ```
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual environments
-venv/
-env/
-ENV/
-.venv/
-.env/
-
 # Dependencies
 node_modules/
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
+# Build outputs
+dist/
+build/
 coverage/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
-
-# Logs
-*.log
+htmlcov/
 
 # Environment variables
 .env
 .env.local
-*.env.*
+.env.*
 
-# Docker
-.dockerenv
-Dockerfile*
-docker-compose*
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# Build artifacts from pyproject.toml
-target/
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.mypy_cache/
+.coverage
+
+# Distribution / packaging
+*.tar.gz
+*.whl
+*.egg-info/
+
+# Venv
+venv/
+.venv/
 ```
