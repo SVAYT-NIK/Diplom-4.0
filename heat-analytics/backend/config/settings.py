@@ -1,6 +1,7 @@
 """
 Application settings and configuration.
 """
+import os
 from pydantic_settings import BaseSettings
 from pydantic import Field
 from pathlib import Path
@@ -8,13 +9,13 @@ from pathlib import Path
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
-    
+
     # Database
     db_path: str = Field(
-        default="./data/heat_analytics.db",
+        default="/app/data/heat_analytics.db",
         description="Path to SQLite database file"
     )
-    
+
     # Analytics parameters
     norm_hdd: int = Field(
         default=4500,
@@ -37,10 +38,10 @@ class Settings(BaseSettings):
     
     # Upload settings
     upload_dir: Path = Field(
-        default=Path("./data/uploads"),
+        default=Path("/app/data/uploads"),
         description="Directory for temporary file uploads"
     )
-    
+
     class Config:
         env_file = ".env"
         case_sensitive = False

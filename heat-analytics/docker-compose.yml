@@ -14,10 +14,10 @@ services:
       - ANOMALY_THRESHOLD=3.0
       - CLUSTER_K=4
       - LOG_LEVEL=INFO
+      - UPLOAD_DIR=/app/data/uploads
     volumes:
       - ./data:/app/data
-      - ./backend:/app/backend
-    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn backend.main:app --host 0.0.0.0 --port 8000
     restart: unless-stopped
 
   frontend:
