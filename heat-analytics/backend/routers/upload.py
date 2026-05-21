@@ -29,7 +29,7 @@ async def get_db_session():
 
 @router.post("/upload", response_model=UploadResponse)
 async def upload_excel(
-    file: UploadFile = File(...),
+    file: UploadFile = File(..., description="Excel file with heat consumption data"),
     building_id: Optional[int] = None,
     db: AsyncSession = Depends(get_db_session),
 ):
@@ -42,17 +42,20 @@ async def upload_excel(
     - Deletes temporary file after processing
     
     Args:
-        file: Excel file to upload
+        file: Excel file to upload (multipart/form-data)
         building_id: Optional existing building ID (if None, creates new building)
         db: Database session
     
     Returns:
         UploadResponse with status, building_id, and rows_parsed count
     """
-    logger.info(f"Received file upload: {file.filename}, size: {file.size}")
+    logger.info(f"Received file upload: {file.filename}, content_type: {file.content_type}, size: {file.size}")
     
     # Validate file type
-    if not file.filename or not file.filename.lower().endswith(('.xlsx', '.xls')):
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="No filename provided")
+    
+    if not file.filename.lower().endswith(('.xlsx', '.xls')):
         raise HTTPException(status_code=400, detail="Only Excel files (.xlsx, .xls) are allowed")
     
     # Create upload directory
@@ -64,8 +67,11 @@ async def upload_excel(
     temp_file_path = upload_dir / safe_filename
     
     try:
-        with temp_file_path.open("wb") as buffer:
-            content = await file.read()
+        # Read file content and save
+        content = await file.read()
+        logger.info(f"Read {len(content)} bytes from file")
+        
+        with open(temp_file_path, "wb") as buffer:
             buffer.write(content)
         
         logger.info(f"Saved temporary file: {temp_file_path}")
