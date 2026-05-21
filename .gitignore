@@ -1,1 +1,16 @@
-Nothing should be ignored based on the provided file changes. The only modified file is a Python source file (`heat-analytics/backend/services/parser.py`), which should not be added to .gitignore.
+```
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Dependencies
+poetry.lock
+
+# Excel files (if they are temporary/test files)
+*.xlsx
+
+# Logs
+*.log
+```
