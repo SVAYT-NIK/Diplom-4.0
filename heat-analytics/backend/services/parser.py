@@ -168,12 +168,25 @@ def parse_excel_file(file_path: Path) -> tuple[Optional[Dict[str, Any]], List[Da
         wb.close()
         
         # Read data with pandas starting from row 6 (0-indexed: row 5)
-        df = pd.read_excel(
+        # First read all data without skipping to get headers correctly
+        df_raw = pd.read_excel(
             file_path,
             sheet_name=0,
-            header=4,  # Row 5 is header (0-indexed)
-            skiprows=range(5),  # Skip first 5 rows (0-4)
+            header=None,  # Don't use any row as header initially
         )
+        
+        # Extract headers from row 5 (0-indexed: row 4)
+        if len(df_raw) > 4:
+            headers = df_raw.iloc[4].tolist()
+            # Create new dataframe with data starting from row 6 (0-indexed: row 5)
+            df = pd.DataFrame(columns=headers)
+            if len(df_raw) > 5:
+                data_rows = df_raw.iloc[5:].copy()
+                data_rows.columns = headers
+                df = data_rows.reset_index(drop=True)
+        else:
+            logger.error("Excel file doesn't have enough rows for headers")
+            raise ValueError("Excel file must have at least 5 rows (4 metadata + 1 header)")
         
         logger.info(f"Loaded DataFrame with shape: {df.shape}")
         logger.debug(f"Columns: {df.columns.tolist()}")
