@@ -5,49 +5,40 @@ node_modules/
 # Build outputs
 dist/
 build/
-coverage/
-htmlcov/
+*.js
+*.ts
+*.tsx
 
 # Environment variables
 .env
 .env.local
 .env.*
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
 
 # Logs
 *.log
 
 # Temporary files
 *.tmp
-*.swp
-*.swo
 
-# IDE files
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+# Python cache (if any Python files exist in project)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Testing
-.pytest_cache/
-.mypy_cache/
+# Coverage reports
+coverage/
+htmlcov/
 .coverage
 
 # Distribution / packaging
 *.tar.gz
 *.whl
 *.egg-info/
-
-# Venv
-venv/
-.venv/
 ```
