@@ -13,4 +13,9 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    // Отключаем строгие проверки TypeScript при сборке
+    target: 'esnext',
+    minify: 'esbuild',
+  },
 })
