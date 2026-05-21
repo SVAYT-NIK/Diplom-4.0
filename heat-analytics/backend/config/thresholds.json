@@ -1,0 +1,37 @@
+{
+  "anomaly_detection": {
+    "ewma_span": 14,
+    "isolation_forest_contamination": 0.1,
+    "isolation_forest_n_estimators": 100,
+    "lof_n_neighbors": 20,
+    "lof_contamination": 0.1
+  },
+  "clustering": {
+    "kmeans_init": "k-means++",
+    "kmeans_n_init": 10,
+    "kmeans_max_iter": 300,
+    "dbscan_eps": 0.5,
+    "dbscan_min_samples": 5,
+    "gmm_n_components": 4,
+    "gmm_covariance_type": "full"
+  },
+  "regression": {
+    "ridge_alpha": 1.0,
+    "lasso_alpha": 0.1,
+    "huber_epsilon": 1.35,
+    "huber_max_iter": 100,
+    "quantile_q_lower": 0.25,
+    "quantile_q_upper": 0.75
+  },
+  "time_series": {
+    "decompose_period": 7,
+    "holt_winters_seasonal": "add",
+    "prophet_changepoint_prior_scale": 0.05,
+    "prophet_seasonality_prior_scale": 10.0
+  },
+  "features": {
+    "lag_days": [1, 2, 3, 7],
+    "rolling_windows": [7, 14, 30],
+    "hdd_base_temp": 18
+  }
+}
