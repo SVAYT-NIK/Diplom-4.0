@@ -2,7 +2,7 @@
 Router for file upload endpoints.
 """
 import logging
-import shutil
+import uuid
 from pathlib import Path
 from typing import Optional
 
@@ -52,18 +52,21 @@ async def upload_excel(
     logger.info(f"Received file upload: {file.filename}, size: {file.size}")
     
     # Validate file type
-    if not file.filename.endswith(('.xlsx', '.xls')):
+    if not file.filename or not file.filename.lower().endswith(('.xlsx', '.xls')):
         raise HTTPException(status_code=400, detail="Only Excel files (.xlsx, .xls) are allowed")
     
     # Create upload directory
     upload_dir = settings.upload_dir
     upload_dir.mkdir(parents=True, exist_ok=True)
     
-    # Save uploaded file temporarily
-    temp_file_path = upload_dir / file.filename
+    # Save uploaded file temporarily - use safe filename
+    safe_filename = f"{uuid.uuid4()}_{Path(file.filename).name}"
+    temp_file_path = upload_dir / safe_filename
+    
     try:
         with temp_file_path.open("wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+            content = await file.read()
+            buffer.write(content)
         
         logger.info(f"Saved temporary file: {temp_file_path}")
         
@@ -134,6 +137,6 @@ async def upload_excel(
     except Exception as e:
         logger.error(f"Error processing upload: {e}", exc_info=True)
         # Clean up temp file on error
-        if temp_file_path.exists():
+        if 'temp_file_path' in locals() and temp_file_path.exists():
             temp_file_path.unlink(missing_ok=True)
         raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")
