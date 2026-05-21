@@ -1,9 +1,12 @@
-```
-# Docker related
-.dockerenv
-!docker-compose.yml
+# Configuration and system files
+*.conf.swp
+*.conf.bak
+*.tmp
 
-# Environment variables
+# Logs
+*.log
+
+# Environment
 .env
 .env.local
 *.env.*
@@ -17,27 +20,28 @@ __pycache__/
 dist/
 build/
 target/
-.gradle/
 
-# IDE and editor files
+# Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
 
-# Logs and cache
-*.log
-*.tmp
-coverage/
-.htmlcov/
-.coverage
-.mypy_cache/
-.pytest_cache/
-
-# OS specific
+# OS
 .DS_Store
 Thumbs.db
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
+
+# Python specific
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
 
 # Compressed files
 *.zip
@@ -62,4 +66,3 @@ Thumbs.db
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-```
