@@ -1,0 +1,71 @@
+# Нормативы теплопотребления для различных типов зданий
+# Единицы: Гкал/м² в месяц при нормативных условиях
+
+buildings:
+  # Типы зданий по году постройки
+  old:
+    year_range: [0, 1990]
+    norm_gcal_m2: 0.035
+    description: "Здания до 1990 года"
+  
+  soviet:
+    year_range: [1991, 2000]
+    norm_gcal_m2: 0.028
+    description: "Здания 1991-2000 годов"
+  
+  modern:
+    year_range: [2001, 2015]
+    norm_gcal_m2: 0.022
+    description: "Здания 2001-2015 годов"
+  
+  new:
+    year_range: [2016, 2030]
+    norm_gcal_m2: 0.018
+    description: "Современные здания с 2016 года"
+
+# Типы отопления
+heating_types:
+  central:
+    norm_factor: 1.0
+    description: "Центральное отопление"
+  
+  individual:
+    norm_factor: 0.85
+    description: "Индивидуальное отопление"
+  
+  autonomous:
+    norm_factor: 0.75
+    description: "Автономное отопление"
+
+# Климатические зоны (ГСОП - градусо-сутки отопительного периода)
+climate_zones:
+  abakan:
+    hdd_base: 4500
+    temp_base: 18
+    heating_period_days: 210
+    description: "Абакан и Республика Хакасия"
+  
+  moscow:
+    hdd_base: 4200
+    temp_base: 18
+    heating_period_days: 200
+    description: "Москва и Московская область"
+  
+  spb:
+    hdd_base: 4600
+    temp_base: 18
+    heating_period_days: 220
+    description: "Санкт-Петербург"
+
+# Пороговые значения для диагностики
+thresholds:
+  efficiency:
+    excellent: 0.85  # Ниже 85% от норматива
+    good: 0.95       # 85-95% от норматива
+    normal: 1.05     # 95-105% от норматива
+    poor: 1.20       # 105-120% от норматива
+    critical: 1.20   # Выше 120% от норматива
+  
+  anomaly:
+    warning: 2.5     # Стандартных отклонений
+    critical: 3.0    # Стандартных отклонений
